@@ -349,7 +349,8 @@ class HTTPTransport(BaseTransport):
                 "The 'credentials' argument is now deprecated in favor of 'auth'.",
                 DeprecationWarning
             )
-            auth = DomainCredentials(credentials)
+            if session.auth is None:
+                session.auth = DomainCredentials(credentials)
         if request_callback is not None or response_callback is not None:
             warnings.warn(
                 "The 'request_callback' and 'response_callback' arguments are now deprecated. "
